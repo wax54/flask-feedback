@@ -6,7 +6,7 @@ from config import DB_NAME
 from models import connect_db
 
 from routes.main import main
-
+from routes.authenticate import authenticate
 
 
 app = Flask(__name__)
@@ -19,3 +19,4 @@ app.config['SQLALCHEMY_ECHO'] = True
 connect_db(app)
 
 app.register_blueprint(main, url_prefix='/')
+app.register_blueprint(authenticate, url_prefix='/')

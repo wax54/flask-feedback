@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %} All Cupcakes {% endblock %}
+
+{% block content %}
+
+<h1 class="display-1"> These are My Cupcakes! </h1>
+<form id="search-form">
+    <label for="cupcake-search">Search Cupcakes By Flavor</label>
+    <input type="text" name="cupcake-search" id="cupcake-search">
+    <input type="submit" value="Search">
+</form>
+<div class="container">
+    <ul id="cupcake-list" class="row justify-content-center">
+
+    </ul>
+</div>
+
+<form id="new-cupcake-form">
+    <h3>Add A New Cucake!</h3>
+    {{form.hidden_tag()}}
+
+    {% for field in form
+    if field.widget.input_type != 'hidden'%}
+    <div class="form-group pt-1 col-12 col-md-6 col-lg-4">
+        {{field.label}}
+        {{field(class_="form-control")}}
+
+        {% for error in field.errors %}
+        <div class="alert alert-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+    <input type="submit" class="btn btn-success" value="Submit">
+</form>
+
+{% endblock %}
