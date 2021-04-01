@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %} Your Time To Matter! {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <h1 class="display-1">All Users</h1>
+    </div>
+    <div class="row justify-content-center">
+        <ul>
+            {% for u in users %}
+            <li><a href="/users/{{u.username}}">{{u.username}}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

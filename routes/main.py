@@ -7,17 +7,3 @@ main = Blueprint('main_routes', __name__)
 def show_home_page():
     """Show The Home Page"""
     return redirect('/register')
-
-
-@main.route('users/<username>')
-def show_user_home_page(username):
-    if "user" not in session:
-        flash("Please Log In", "warning")
-        return redirect('/login')
-    else:
-        if session['user'] == username:
-            user = User.get(username)
-            return render_template('user_profile.html', user=user)
-        else:
-            return ("Botched it", 401)
-
