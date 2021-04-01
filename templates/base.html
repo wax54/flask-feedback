@@ -17,15 +17,20 @@
     Base Content
     {% endblock %}
 
-    {% if get_flashed_messages() %}
+
     {% block flashed_messages%}
     <ul>
-        {% for msg in get_flashed_messages() %}
-        <li>{{msg}}</li>
+        {% for category, msg in get_flashed_messages(with_categories=True) %}
+        {% if category == 'message' %}
+        <li class="alert alert-danger">{{msg}}</li>
+        {% else %}
+        <li class="alert alert-{{category}}">{{msg}}</li>
+        {% endif %}
         {% endfor %}
-    </ul>
-    {% endblock %}
-    {% endif %}
+        </ul>
+        {% endblock %}
+        
+
 </body>
 
 </html>
