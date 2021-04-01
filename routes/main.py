@@ -15,5 +15,9 @@ def show_user_home_page(username):
         flash("Please Log In", "warning")
         return redirect('/login')
     else:
-        user = User.get(username)
-        return render_template('user_profile.html', user=user)
+        if session['user'] == username:
+            user = User.get(username)
+            return render_template('user_profile.html', user=user)
+        else:
+            return ("Botched it", 401)
+

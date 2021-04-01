@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %} Your Time To Matter! {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <h1 class="display-1"> We Welcome Your Feedback!</h1>
+    </div>
+    <div class="row justify-content-center">
+        <form id="login-form" method="POST">
+            {%include 'basic_form.html'%}
+            <input type="submit" class="btn btn-success" value="Submit!">
+        </form>
+    </div>
+</div>
+{% endblock %}

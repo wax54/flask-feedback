@@ -1,6 +1,5 @@
 from models import db, AbstractBDModel
 from flask_bcrypt import Bcrypt
-from sqlalchemy.exc import IntegrityError
 
 bcrypt = Bcrypt()
 

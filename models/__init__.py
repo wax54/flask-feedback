@@ -26,8 +26,8 @@ class AbstractBDModel():
         db.session.commit()
 
     @classmethod
-    def get(cls, u_id):
-        return cls.query.get_or_404(u_id)
+    def get(cls, pk):
+        return cls.query.get_or_404(pk)
 
     @classmethod
     def get_all(cls):

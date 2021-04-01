@@ -4,9 +4,32 @@
 
 {% block content %}
 <h1 class="display-1">{{user.first_name}} {{user.last_name}}</h1>
-
-username: {{user.username}}
-{% session.get('user') == user.username %}
-Reset Password Functionality?
-{% endif %}
+<ol>
+    <li>first_name - {{user.first_name}}</li>
+    <li>last_name - {{user.last_name}}</li>
+    <li>username - {{user.username}}</li>
+    <li>posts:
+        <ul>{% if user.feedback %}
+            {% for comment in user.feedback %}
+            <li>
+                <span class="mx-2">{{comment.title}}</span>
+                <a class="btn btn-info" href="/feedback/{{comment.id}}/update">Edit</a>
+                <form action="/feedback/{{comment.id}}/delete" method="POST" style="display: inline;">
+                    <button class="btn btn-danger">Trash It!</button>
+                </form>
+            </li>
+            {% endfor %}
+            {% else %}
+            User feedback Will Appear Here... When You decide to leave some...
+            {% endif %}
+        </ul>
+        </li>
+        <br>
+        <li>
+            <a class="btn btn-success" href="/users/{{user.username}}/feedback/add">Add More feedback!</a>
+            <form action="/users/{{user.username}}/delete" method="post" style="display: inline;">
+                <button class="btn btn-danger">Delete User Forever!</button>
+            </form>
+        </li>
+        </ol>
 {% endblock %}
