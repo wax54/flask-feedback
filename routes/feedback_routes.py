@@ -77,9 +77,9 @@ def delete_feedback(feedback_id):
     Delete a specific piece of feedback and redirect to /users/<username> — 
     Make sure that only the user who has written that feedback can delete it
     """
-    if 'user' in session:
+    curr_username = session.get('user')
+    if curr_username:
         comment = Feedback.get(feedback_id)
-        curr_username = session['user']
         if curr_username == comment.username:
             comment.delete()
             return redirect(f'/users/{curr_username}')

@@ -1,6 +1,7 @@
 from flask import Blueprint, redirect, render_template, request, session, flash
 from models.user import User, InputNotUniqueError
 from forms.user_forms import UserRegistrationForm, UserLoginForm
+
 authenticate_routes = Blueprint('authenticate_routes', __name__)
 
 
