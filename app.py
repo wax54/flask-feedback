@@ -5,12 +5,11 @@ from secrets import FLASK_SECRET_KEY
 from config import DB_NAME, DB_ECHO
 
 from models import connect_db
-from models.user import User
 
-from routes.main import main
-from routes.authenticate import authenticate
-from routes.users import user_routes
-from routes.feedback import feedback_routes
+from routes.main_routes import main_routes
+from routes.authenticate_routes import authenticate_routes
+from routes.user_routes import user_routes
+from routes.feedback_routes import feedback_routes
 
 app = Flask(__name__)
 
@@ -24,8 +23,7 @@ connect_db(app)
 
 toolbar = DebugToolbarExtension(app)
 
-app.register_blueprint(main, url_prefix='/')
-app.register_blueprint(authenticate, url_prefix='/')
+app.register_blueprint(main_routes, url_prefix='/')
+app.register_blueprint(authenticate_routes, url_prefix='/')
 app.register_blueprint(user_routes, url_prefix='/users')
-
 app.register_blueprint(feedback_routes, url_prefix='/')

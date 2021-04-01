@@ -19,19 +19,24 @@ def add_feedback(username):
         to /users/<username> — Make sure that only
         the user who is logged in can successfully add feedback
     """
-    if session.get('user') != username:
-        flash("Eyes on Your own Profile", "warning")
-        return redirect('/')
-
-    form = FeedbackForm()
-    if form.validate_on_submit():
-        title = form.title.data
-        content = form.content.data
-        comment = Feedback(title=title, content=content, username=username)
-        comment.update_db()
-        return redirect(f'/users/{username}')
+    curr_username = session.get('user')
+    if curr_username:
+        if curr_username == username:
+            form = FeedbackForm()
+            if form.validate_on_submit():
+                title = form.title.data
+                content = form.content.data
+                comment = Feedback(title=title, content=content, username=username)
+                comment.update_db()
+                return redirect(f'/users/{username}')
+            else:
+                return render_template('add_feedback_form.html', form=form)
+        else:
+            flash("Eyes on Your own Profile", "warning")
+            return redirect(f'/users/{curr_username}')
     else:
-        return render_template('add_feedback_form.html', form=form)
+        flash("Please Log In", "danger")
+        return redirect('/')
 
 
 @feedback_routes.route('/feedback/<int:feedback_id>/update', methods=["POST", "GET"])
@@ -78,8 +83,10 @@ def delete_feedback(feedback_id):
         if curr_username == comment.username:
             comment.delete()
             return redirect(f'/users/{curr_username}')
+        else:
+            return f"401! You're not authorized to do that {curr_username}!", 401
     else:
-        flash("Don't Mess Around Bub.")
+        flash("Log In Please.")
         return redirect('/')
 
 
