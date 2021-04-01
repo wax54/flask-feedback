@@ -15,10 +15,5 @@ def show_user_home_page(username):
         flash("Please Log In", "warning")
         return redirect('/login')
     else:
-        curr_user = session['user']
-        if username == curr_user:
-            user = User.get(username)
-            return render_template('user_profile.html', user=user)
-        else:
-            flash('Look At Your Own Damn Name!', 'warning')
-            return redirect(f'/users/{curr_user}')
+        user = User.get(username)
+        return render_template('user_profile.html', user=user)

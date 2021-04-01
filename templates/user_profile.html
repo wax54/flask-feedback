@@ -6,5 +6,7 @@
 <h1 class="display-1">{{user.first_name}} {{user.last_name}}</h1>
 
 username: {{user.username}}
-
+{% session.get('user') == user.username %}
+Reset Password Functionality?
+{% endif %}
 {% endblock %}
